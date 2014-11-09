@@ -1,13 +1,11 @@
 Summary:	Complex floating-point library with high precision and exact rounding
 Name:		mpc
-Version:	1.0.1
+Version:	1.0.2
 Release:	1
 License:	LGPL 2.1+
 Group:		Libraries
 Source0:	http://multiprecision.org/mpc/download/%{name}-%{version}.tar.gz
-# Source0-md5:	b32a2e1a3daa392372fbd586d1ed3679
-# http://lists.gforge.inria.fr/pipermail/mpc-discuss/2011-February/000805.html
-Patch0:		%{name}-configure.patch
+# Source0-md5:	68fadff3358fb3e7976c7a398a0af4c3
 URL:		http://multiprecision.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -25,13 +23,14 @@ is built upon and follows the same principles as MPFR.
 Summary:	Header files for MPC library
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	gmp-devel
+Requires:	mpfr-devel
 
 %description devel
 Header files for MPC library.
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -48,6 +47,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -63,7 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmpc.so
-%{_libdir}/libmpc.la
 %{_includedir}/mpc.h
 %{_infodir}/mpc.info*
 
