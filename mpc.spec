@@ -1,7 +1,7 @@
 Summary:	Complex floating-point library with high precision and exact rounding
 Name:		mpc
 Version:	1.0.2
-Release:	1
+Release:	2
 License:	LGPL 2.1+
 Group:		Libraries
 Source0:	http://multiprecision.org/mpc/download/%{name}-%{version}.tar.gz
